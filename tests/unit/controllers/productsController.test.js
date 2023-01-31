@@ -69,7 +69,7 @@ describe('Teste de unidade do productController', function () {
       res.json = sinon.stub().returns();
       sinon
         .stub(productService, 'getById')
-        .resolves({ type: 'PASSENGER_NOT_FOUND', message: 'Passenger not found' });
+        .resolves({ type: 'PRODUCT_NOT_FOUND', message: 'Product not found' });
 
       // Act
       await productController.getById(req, res);

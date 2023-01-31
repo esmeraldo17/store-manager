@@ -11,6 +11,10 @@ const getById = async (id) => {
   return { type: null, message: product };
 };
 
+// const createProduct = async (name) => {
+
+// };
+
 module.exports = {
   getAll,
   getById,

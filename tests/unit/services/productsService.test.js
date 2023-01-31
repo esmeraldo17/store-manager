@@ -31,8 +31,8 @@ describe('Verificando service product', function () {
       const result = await productService.getById(1);
 
       // assert
-      expect(result.type).to.equal('PASSENGER_NOT_FOUND');
-      expect(result.message).to.equal('Passenger not found');
+      expect(result.type).to.equal('PRODUCT_NOT_FOUND');
+      expect(result.message).to.equal('Product not found');
     });
 
     it('retorna a produto caso ID existente', async function () {
