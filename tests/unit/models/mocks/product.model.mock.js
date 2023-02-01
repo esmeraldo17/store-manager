@@ -13,6 +13,9 @@ const products = [
   }
 ];
 
+const newProduct = { name: 'agua' };
+
 module.exports = {
   products,
+  newProduct,
 };

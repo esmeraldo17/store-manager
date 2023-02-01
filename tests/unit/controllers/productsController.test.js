@@ -11,6 +11,7 @@ const { productController } = require('../../../src/controllers');
 const {
   productListMock,
   newProductMock,
+  productMock,
 } = require('./mocks/product.controller.mock');
 
 describe('Teste de unidade do productController', function () {
@@ -77,6 +78,33 @@ describe('Teste de unidade do productController', function () {
       // Assert
       expect(res.status).to.have.been.calledWith(404);
       expect(res.json).to.have.been.calledWith({ "message": "Product not found" });
+    });
+  });
+
+  describe('Cadastrando uma] novo produto', function () {
+    it('ao enviar dados válidos deve salvar com sucesso!', async function () {
+      // Arrange
+      const res = {};
+      // Aqui o mock do objeto req, atribui o objeto `passengerMock` ao atributo body
+      const req = {
+        body: productMock,
+      };
+
+      /* O dublê de `res.status` e `res.json` é o mesmo padrão que já fizemos anteriormente */
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub().returns();
+      
+      sinon
+        .stub(productService, 'createProduct')
+        .resolves({ type: null, message: newProductMock });
+      
+      // Act
+      await productController.createProduct(req, res);
+
+      // Assert
+    
+      expect(res.status).to.have.been.calledWith(201);
+      expect(res.json).to.have.been.calledWith(newProductMock);
     });
   });
   

@@ -13,6 +13,9 @@ const products = [
   }
 ];
 
+const validName = 'Agua';
+
 module.exports = {
   products,
+  validName,
 };
