@@ -13,7 +13,7 @@ const products = [
   }
 ];
 
-const validName = 'Agua';
+const validName = 'Agua Mineral';
 
 module.exports = {
   products,
