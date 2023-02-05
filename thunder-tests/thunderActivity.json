@@ -4,13 +4,18 @@
     "colId": "history",
     "containerId": "",
     "name": "http://localhost:3000/products",
-    "url": "http://localhost:3000/products/999",
-    "method": "GET",
+    "url": "http://localhost:3000/sales",
+    "method": "POST",
     "sortNum": 0,
     "created": "2023-01-30T22:29:45.240Z",
-    "modified": "2023-01-30T23:04:53.833Z",
+    "modified": "2023-02-05T22:47:47.321Z",
     "headers": [],
     "params": [],
+    "body": {
+      "type": "json",
+      "raw": "[\n  {\n    \"productId\": 1,\n    \"quantity\": 1\n  },\n  {\n    \"productId\": 1,\n    \"quantity\": 5\n  }\n]",
+      "form": []
+    },
     "tests": []
   },
   {
@@ -22,12 +27,12 @@
     "method": "GET",
     "sortNum": 0,
     "created": "2023-01-30T22:30:24.869Z",
-    "modified": "2023-02-01T18:35:09.821Z",
+    "modified": "2023-02-01T21:18:39.506Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"name\": \"Agua\"\n}",
+      "raw": "{\n  \"name\": \"Agua fresca\"\n}",
       "form": []
     },
     "tests": []
