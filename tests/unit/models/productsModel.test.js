@@ -35,6 +35,15 @@ describe('Testes de unidade do model de produtos', function () {
     expect(result).to.equal(30);
   });
 
+  it('actualizando um produto', async function () {
+    // Arrange
+    sinon.stub(connection, 'execute').resolves([{ insertId: 30 }]);
+    // Act
+    const result = await productModel.updateProduct(1, newProduct);
+    // Assert
+    expect(result).to.equal(30);
+  });
+
   afterEach(function () {
     sinon.restore();
   });

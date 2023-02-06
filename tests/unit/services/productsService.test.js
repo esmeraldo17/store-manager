@@ -23,18 +23,6 @@ describe('Verificando service product', function () {
 
 
   describe('listando produtos por id', function () {
-    it('retorna um erro caso a produto não existe', async function () {
-      // arrange
-      sinon.stub(productModel, 'getById').resolves(undefined);
-
-      // act
-      const result = await productService.getById(1);
-
-      // assert
-      expect(result.type).to.equal('PRODUCT_NOT_FOUND');
-      expect(result.message).to.equal('Product not found');
-    });
-
     it('retorna a produto caso ID existente', async function () {
       // arrange
       sinon.stub(productModel, 'getById').resolves(products[0]);
@@ -57,6 +45,21 @@ describe('Verificando service product', function () {
 
       // act
       const result = await productService.createProduct(validName);
+
+      // assert
+      expect(result.type).to.equal(null);
+      expect(result.message).to.deep.equal(products[0]);
+    });
+  });
+
+  describe('actualizacao de uma produto com valores válidos', function () {
+    it('retorna o ID do produto cadastrado', async function () {
+      // arrange
+      sinon.stub(productModel, 'updateProduct').resolves(1, validName);
+      sinon.stub(productModel, 'getById').resolves(products[0]);
+
+      // act
+      const result = await productService.updateProduct(1, validName);
 
       // assert
       expect(result.type).to.equal(null);

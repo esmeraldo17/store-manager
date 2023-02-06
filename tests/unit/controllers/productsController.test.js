@@ -107,7 +107,34 @@ describe('Teste de unidade do productController', function () {
       expect(res.json).to.have.been.calledWith(newProductMock);
     });
   });
-  
+
+  describe('Actualizando um novo produto', function () {
+    it('ao enviar dados válidos deve actualizar com sucesso!', async function () {
+      // Arrange
+      const res = {};
+      // Aqui o mock do objeto req, atribui o objeto `passengerMock` ao atributo body
+      const req = {
+        body: productMock,
+        params: { id: 1 }
+      };
+
+      /* O dublê de `res.status` e `res.json` é o mesmo padrão que já fizemos anteriormente */
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub().returns();
+
+      sinon
+        .stub(productService, 'updateProduct')
+        .resolves({ type: null, message: newProductMock });
+
+      // Act
+      await productController.updateProduct(req, res);
+
+      // Assert
+
+      expect(res.status).to.have.been.calledWith(200);
+      expect(res.json).to.have.been.calledWith(newProductMock);
+    });
+  });
 
   afterEach(function () {
     sinon.restore();
