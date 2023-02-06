@@ -1,5 +1,7 @@
 const { productService } = require('../services');
 
+const errorSms = '"name" length must be at least 5 characters long';
+
 const getAll = async (_req, res) => {
   const products = await productService.getAll();
   res.status(200).json(products.message);
@@ -28,8 +30,20 @@ const createProduct = async (req, res) => {
   res.status(201).json(message);
 };
 
+const updateProduct = async (req, res) => {
+  const { id } = req.params;
+  const { name } = req.body;
+  const { type, message } = await productService.updateProduct(id, name);
+
+  if (!name) return res.status(400).json({ message: '"name" is required' });
+  if (type === 'PRODUCT_NOT_FOUND') return res.status(404).json({ message });
+  if (type === 'INVALID_VALUE' && message === errorSms) return res.status(422).json({ message });
+  res.status(200).json(message);
+};
+
 module.exports = {
   getAll,
   getById,
   createProduct,
+  updateProduct,
 };
