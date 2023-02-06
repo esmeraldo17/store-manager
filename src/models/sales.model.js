@@ -4,7 +4,7 @@ const insertToSales = async () => {
   const [{ insertId }] = await connection.execute(
     'INSERT INTO StoreManager.sales (date) VALUES(NOW())',
   );
-
+  console.log(insertId);
   return insertId; 
 };
 
@@ -41,7 +41,34 @@ const insertToSalesProduts = async (body) => {
   return { id: saleId, itemsSold: sales };
 };
 
+const getAll = async () => {
+  const query = `SELECT sales.date as date, spr.sale_id as saleId, spr.product_id as productId,
+  spr.quantity as quantity
+  FROM StoreManager.sales AS sales
+  INNER JOIN sales_products AS spr ON sales.id = spr.sale_id`;
+  const [sales] = await connection.execute(query);
+
+  return sales;
+};
+
+const getById = async (id) => {
+  const query = `SELECT sales.date as date, spr.sale_id as saleId, spr.product_id as productId,
+  spr.quantity as quantity
+  FROM StoreManager.sales AS sales
+  INNER JOIN sales_products AS spr ON sales.id = spr.sale_id
+  HAVING sale_id = ?`;
+  const [sales] = await connection.execute(query, [id]);
+  const result = sales.map(({ productId, date, quantity }) => ({
+    date,
+    productId,
+    quantity,
+  }));
+  return result;
+};
+
 module.exports = {
   insertToSalesProduts,
   getProductById,
+  getAll,
+  getById,
 };

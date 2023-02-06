@@ -13,9 +13,23 @@ const products = [
   }
 ];
 
+const sales = [
+  {
+    "productId": 1,
+    "quantity": 1
+  }
+];
+
+const salesReturn = {
+  id: 1,
+  intemsSod: [{ productId: 1, quantity: 5 }]
+};
+
 const validName = 'Agua Mineral';
 
 module.exports = {
   products,
   validName,
+  sales,
+  salesReturn
 };

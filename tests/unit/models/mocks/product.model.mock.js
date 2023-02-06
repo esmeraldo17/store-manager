@@ -15,7 +15,26 @@ const products = [
 
 const newProduct = { name: 'agua' };
 
+const newSale = [
+  {
+    "productId": 1,
+    "quantity": 5
+  }
+]
+
+const newSaleReturn = {
+  "id": 5,
+  "itemsSold": [
+    {
+      "productId": 1,
+      "quantity": 5
+    }
+  ]
+}
+
 module.exports = {
   products,
   newProduct,
+  newSale,
+  newSaleReturn
 };

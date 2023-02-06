@@ -15,6 +15,10 @@ app.get('/products', productController.getAll);
 
 app.get('/products/:id', productController.getById);
 
+app.get('/sales', salesController.getAll);
+
+app.get('/sales/:id', salesController.getById);
+
 app.post('/products', productController.createProduct);
 
 app.post('/sales', salesController.createSales1, salesController.createSales2);

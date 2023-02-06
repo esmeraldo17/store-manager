@@ -81,7 +81,7 @@ describe('Teste de unidade do productController', function () {
     });
   });
 
-  describe('Cadastrando uma] novo produto', function () {
+  describe('Cadastrando um novo produto', function () {
     it('ao enviar dados válidos deve salvar com sucesso!', async function () {
       // Arrange
       const res = {};
