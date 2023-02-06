@@ -36,10 +36,17 @@ const deleteProduct = async (id) => {
   return result;
 };
 
+const getByName = async (wantedName) => {
+  const products = await getAll();
+  return products.filter(({ name }) =>
+    name.toLowerCase().includes(wantedName.toLowerCase()));
+};
+
 module.exports = {
   getAll,
   getById,
   insert,
   updateProduct,
   deleteProduct,
+  getByName,
 };
