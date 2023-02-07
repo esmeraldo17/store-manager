@@ -4,7 +4,7 @@ const sinon = require('sinon');
 const { productModel } = require('../../../src/models');
 const connection = require('../../../src/models/connection');
 
-const { products, newProduct } = require('./mocks/product.model.mock');
+const { products, newProduct, searchProduct } = require('./mocks/product.model.mock');
 
 
 describe('Testes de unidade do model de produtos', function () {
@@ -42,6 +42,24 @@ describe('Testes de unidade do model de produtos', function () {
     const result = await productModel.updateProduct(1, newProduct);
     // Assert
     expect(result).to.equal(30);
+  });
+
+  it('deletando um produto', async function () {
+    // Arrange
+    sinon.stub(connection, 'execute').resolves([{ affectedRows: 1 }]);
+    // Act
+    const result = await productModel.deleteProduct(1);
+    // Assert
+    expect(result).to.equal(1);
+  });
+
+  it('pesquisando um produto por nome', async function () {
+    // Arrange
+    sinon.stub(connection, 'execute').resolves([products]);
+    // Act
+    const result = await productModel.getByName('Martelo');
+    // Assert
+    expect(result).to.deep.equal(searchProduct);
   });
 
   afterEach(function () {

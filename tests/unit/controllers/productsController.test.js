@@ -136,6 +136,60 @@ describe('Teste de unidade do productController', function () {
     });
   });
 
+  describe('Deleta um produto', function () {
+    it('Ao passar o id deleta producto com sucesso!', async function () {
+      // Arrange
+      const res = {};
+      // Aqui o mock do objeto req, atribui o objeto `passengerMock` ao atributo body
+      const req = {
+        params: { id: 1 }
+      };
+
+      /* O dublê de `res.status` e `res.json` é o mesmo padrão que já fizemos anteriormente */
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub().returns();
+
+      sinon
+        .stub(productService, 'deleteProduct')
+        .resolves({ type: null, message: '' });
+
+      // Act
+      await productController.deleteProduct(req, res);
+
+      // Assert
+
+      expect(res.status).to.have.been.calledWith(204);
+      expect(res.json).to.have.been.calledWith('');
+    });
+  });
+
+  describe('Pesquisa um produto pelo nome', function () {
+    it('Ao passar o nome retorna producto com sucesso!', async function () {
+      // Arrange
+      const res = {};
+      // Aqui o mock do objeto req, atribui o objeto `passengerMock` ao atributo body
+      const req = {
+        query: { q: 'Martelo' }
+      };
+
+      /* O dublê de `res.status` e `res.json` é o mesmo padrão que já fizemos anteriormente */
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub().returns();
+
+      sinon
+        .stub(productService, 'getByName')
+        .resolves({ type: null, message: newProductMock });
+
+      // Act
+      await productController.getByName(req, res);
+
+      // Assert
+
+      expect(res.status).to.have.been.calledWith(200);
+      expect(res.json).to.have.been.calledWith(newProductMock);
+    });
+  });
+
   afterEach(function () {
     sinon.restore();
   });

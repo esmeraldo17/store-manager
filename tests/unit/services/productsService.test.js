@@ -4,7 +4,7 @@ const sinon = require('sinon');
 const { productService } = require('../../../src/services');
 const { productModel } = require('../../../src/models');
 
-const { products, validName } = require('./mocks/product.service.mock');
+const { products, validName, searchProduct } = require('./mocks/product.service.mock');
 
 describe('Verificando service product', function () {
   describe('listagem de produtos', function () {
@@ -64,6 +64,35 @@ describe('Verificando service product', function () {
       // assert
       expect(result.type).to.equal(null);
       expect(result.message).to.deep.equal(products[0]);
+    });
+  });
+
+  describe(' deletando um produto ', function () {
+    it('deleta produto cadastrado', async function () {
+      // arrange
+      sinon.stub(productModel, 'deleteProduct').resolves(1);
+
+      // act
+      const result = await productService.deleteProduct(1);
+
+      // assert
+      expect(result.type).to.equal(null);
+      expect(result.message).to.deep.equal('');
+    });
+  });
+
+  describe('Pesquisando um produto ', function () {
+    it('Pesquisando um produto pelonome', async function () {
+      // arrange
+      sinon.stub(productModel, 'getAll').resolves(products);
+      sinon.stub(productModel, 'getByName').resolves(searchProduct);
+
+      // act
+      const result = await productService.getByName('Martelo');
+
+      // assert
+      expect(result.type).to.equal(null);
+      expect(result.message).to.deep.equal(searchProduct);
     });
   });
   

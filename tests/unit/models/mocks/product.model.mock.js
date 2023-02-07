@@ -15,6 +15,8 @@ const products = [
 
 const newProduct = { name: 'agua' };
 
+const searchProduct = [{ id: 1, name: 'Martelo de Thor'}];
+
 const newSale = [
   {
     "productId": 1,
@@ -36,5 +38,6 @@ module.exports = {
   products,
   newProduct,
   newSale,
-  newSaleReturn
+  newSaleReturn,
+  searchProduct
 };

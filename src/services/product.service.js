@@ -34,7 +34,7 @@ const updateProduct = async (id, name) => {
 };
 
 const deleteProduct = async (id) => {
-  const { affectedRows } = await productModel.deleteProduct(id);
+  const affectedRows = await productModel.deleteProduct(id);
 
   if (affectedRows === 0) {
     return { type: 404, message: 'Product not found' };

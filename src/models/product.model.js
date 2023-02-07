@@ -31,9 +31,9 @@ const updateProduct = async (id, name) => {
 
 const deleteProduct = async (id) => {
   const query = 'DELETE FROM products WHERE id = ?';
-  const [result] = await connection.execute(query, [id]);
-  console.log(result);
-  return result;
+  const [{ affectedRows }] = await connection.execute(query, [id]);
+
+  return affectedRows;
 };
 
 const getByName = async (wantedName) => {

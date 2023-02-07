@@ -13,6 +13,13 @@ const products = [
   }
 ];
 
+const searchProduct = [
+  {
+    "id": 1,
+    "name": "Martelo de Thor"
+  }
+];
+
 const sales = [
   {
     "productId": 1,
@@ -31,5 +38,6 @@ module.exports = {
   products,
   validName,
   sales,
-  salesReturn
+  salesReturn,
+  searchProduct
 };
