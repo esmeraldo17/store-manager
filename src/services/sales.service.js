@@ -33,16 +33,21 @@ const deleteSale = async (id) => {
   }
   return { type: null, message: '' };
 };
+const util = async (body) => {
+  const product = await Promise.all(body.map(async (e) => {
+    const verifyProduct = await salesModel.getProductById(e.productId);
+    if (!verifyProduct) return true;
+  }));
+  return product;
+};
 
 const updateSale = async (id, body) => {
   const error = validateSalesInput(body);
   if (error.type) return error;
 
   const isSaleExist = await salesModel.getSaleById(id);
-  const product = await Promise.all(body.map(async (e) => {
-    const verifyProduct = await salesModel.getProductById(e.productId);
-    if (!verifyProduct) return true;
-  }));
+  const product = await util(body);
+  console.log(product);
   if (isSaleExist.length === 0) return { type: 'SALE_NOT_FOUND', message: 'Sale not found' };
   if (product[0] === true || product[1] === true) {
     return { type: 'PRODUCT_NOT_FOUND', message: 'Product not found' };
