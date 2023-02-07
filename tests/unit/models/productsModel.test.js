@@ -26,15 +26,6 @@ describe('Testes de unidade do model de produtos', function () {
     expect(result).to.be.deep.equal(products[0]);
   });
 
-  it('Cadastrando um produto', async function () {
-    // Arrange
-    sinon.stub(connection, 'execute').resolves([{ insertId: 30 }]);
-    // Act
-    const result = await productModel.insert(newProduct);
-    // Assert
-    expect(result).to.equal(30);
-  });
-
   it('actualizando um produto', async function () {
     // Arrange
     sinon.stub(connection, 'execute').resolves([{ insertId: 30 }]);

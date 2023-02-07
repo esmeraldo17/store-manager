@@ -1,4 +1,5 @@
 const { salesModel } = require('../models');
+// const { getProductById } = require('../models/sales.model');
 const { validateSalesInput } = require('./validations.js/validationInputValues');
 
 const createSales = async (body) => {
@@ -33,9 +34,31 @@ const deleteSale = async (id) => {
   return { type: null, message: '' };
 };
 
+const updateSale = async (id, body) => {
+  const error = validateSalesInput(body);
+  if (error.type) return error;
+
+  const isSaleExist = await salesModel.getSaleById(id);
+  const product = await Promise.all(body.map(async (e) => {
+    const verifyProduct = await salesModel.getProductById(e.productId);
+    if (!verifyProduct) return true;
+  }));
+  if (isSaleExist.length === 0) return { type: 'SALE_NOT_FOUND', message: 'Sale not found' };
+  if (product[0] === true || product[1] === true) {
+    return { type: 'PRODUCT_NOT_FOUND', message: 'Product not found' };
+  }
+  await salesModel.updateSale(id, body);
+
+  const sale = await getById(id);
+  const object = { saleId: id, itemsUpdated: sale.message };
+
+  return { type: null, message: object };
+};
+
 module.exports = {
   createSales,
   getAll,
   getById,
   deleteSale,
+  updateSale,
 };

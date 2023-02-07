@@ -5,7 +5,7 @@ const errorMessage2 = '"quantity" is required';
 const errorMessage3 = '"productId" is required';
 const errorMessage4 = 'Product not found';
 
-const createSales1 = async (req, res, next) => {
+const util = async (req, res, next) => {
   const bod = req.body;
   const { type, message } = await salesService.createSales(bod);
   if (type && message === errorMessage3) return res.status(400).json({ message });
@@ -50,10 +50,21 @@ const deleteSale = async (req, res) => {
   res.status(204).json(message);
 };
 
+const updateSale = async (req, res) => {
+  const { id } = req.params;
+  const bod = req.body;
+  const { type, message } = await salesService.updateSale(id, bod);
+
+  if (type && message === errorMessage1) return res.status(422).json({ message });
+  if (type === 'SALE_NOT_FOUND') return res.status(404).json({ message });
+  if (type === 'PRODUCT_NOT_FOUND') return res.status(404).json({ message });
+  res.status(200).json(message);
+};
 module.exports = {
-  createSales1,
+  util,
   createSales2,
   getAll,
   getById,
   deleteSale,
+  updateSale,
 };

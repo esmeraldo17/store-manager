@@ -24,6 +24,11 @@ const newSale = [
   }
 ]
 
+const sale = {
+  "productId": 1,
+  "quantity": 5
+}
+
 const newSaleReturn = {
   "id": 5,
   "itemsSold": [
@@ -34,10 +39,23 @@ const newSaleReturn = {
   ]
 }
 
+const updatedSaleReturn = {
+  "saleId": 5,
+  "itemsUpdated": [
+    {
+      "productId": 1,
+      "quantity": 5
+    }
+  ]
+}
+
+
 module.exports = {
   products,
   newProduct,
   newSale,
   newSaleReturn,
-  searchProduct
+  searchProduct,
+  sale,
+  updatedSaleReturn
 };

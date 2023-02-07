@@ -12,6 +12,8 @@ const {
   saleListMock,
   newSaleMock,
   saleMock,
+  productB,
+  productBResult,
 } = require('./mocks/product.controller.mock');
 
 describe('Teste de unidade do saleController', function () {
@@ -129,6 +131,34 @@ describe('Teste de unidade do saleController', function () {
 
       expect(res.status).to.have.been.calledWith(204);
       expect(res.json).to.have.been.calledWith('');
+    });
+  });
+
+  describe('actualiza uma venda', function () {
+    it('Ao passar o id actualiza venda com sucesso!', async function () {
+      // Arrange
+      const res = {};
+      // Aqui o mock do objeto req, atribui o objeto `passengerMock` ao atributo body
+      const req = {
+        params: { id: 1 },
+        body: productB
+      };
+
+      /* O dublê de `res.status` e `res.json` é o mesmo padrão que já fizemos anteriormente */
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub().returns();
+
+      sinon
+        .stub(salesService, 'updateSale')
+        .resolves({ type: null, message: productBResult });
+
+      // Act
+      await salesController.updateSale(req, res);
+
+      // Assert
+
+      expect(res.status).to.have.been.calledWith(200);
+      expect(res.json).to.have.been.calledWith(productBResult);
     });
   });
 
