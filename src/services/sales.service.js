@@ -25,7 +25,7 @@ const getById = async (id) => {
 };
 
 const deleteSale = async (id) => {
-  const { affectedRows } = await salesModel.deleteSale(id);
+  const affectedRows = await salesModel.deleteSale(id);
 
   if (affectedRows === 0) {
     return { type: 404, message: 'Sale not found' };

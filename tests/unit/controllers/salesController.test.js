@@ -105,6 +105,33 @@ describe('Teste de unidade do saleController', function () {
     });
   });
 
+  describe('Deleta uma venda', function () {
+    it('Ao passar o id deleta venda com sucesso!', async function () {
+      // Arrange
+      const res = {};
+      // Aqui o mock do objeto req, atribui o objeto `passengerMock` ao atributo body
+      const req = {
+        params: { id: 1 }
+      };
+
+      /* O dublê de `res.status` e `res.json` é o mesmo padrão que já fizemos anteriormente */
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub().returns();
+
+      sinon
+        .stub(salesService, 'deleteSale')
+        .resolves({ type: null, message: '' });
+
+      // Act
+      await salesController.deleteSale(req, res);
+
+      // Assert
+
+      expect(res.status).to.have.been.calledWith(204);
+      expect(res.json).to.have.been.calledWith('');
+    });
+  });
+
   afterEach(function () {
     sinon.restore();
   });

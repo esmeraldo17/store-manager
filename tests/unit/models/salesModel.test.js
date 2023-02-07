@@ -20,6 +20,14 @@ describe('Testes de unidade do model de sales', function () {
   //   expect(result).to.equal(newSaleReturn);
   // });
  
+  it('deletando uma venda', async function () {
+    // Arrange
+    sinon.stub(connection, 'execute').resolves([{ affectedRows: 1 }]);
+    // Act
+    const result = await salesModel.deleteSale(1);
+    // Assert
+    expect(result).to.equal(1);
+  });
   afterEach(function () {
     sinon.restore();
   });

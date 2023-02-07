@@ -64,6 +64,20 @@ describe('Testes de unidade do service de sales', function () {
 
   });
 
+  describe(' deletando uma venda ', function () {
+    it('deleta venda cadastrado', async function () {
+      // arrange
+      sinon.stub(salesModel, 'deleteSale').resolves(1);
+
+      // act
+      const result = await salesService.deleteSale(1);
+
+      // assert
+      expect(result.type).to.equal(null);
+      expect(result.message).to.deep.equal('');
+    });
+  });
+
   afterEach(function () {
     sinon.restore();
   });
